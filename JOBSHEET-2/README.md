@@ -120,3 +120,45 @@ Nama : Katrina Devianti
 NIM : 04062005
 Jurusan : Rekayasa Keamanan Siber
 ```
+## TUGAS
+1. Kelas Dosen
+```
+class Dosen{
+    public $nama;
+    public $nip;
+    public $mataKuliah;
+}
+```
+- Atribut:
+  - public $nama; — Menyimpan nama dosen.
+  - public $nip; — Menyimpan NIP dosen.
+  - public $mataKuliah; — Menyimpan mata kuliah yang diajar dosen.
+    
+2. Constructor
+```
+public function __construct($nama, $nip, $mataKuliah) {
+    $this->nama = $nama;
+    $this->nip = $nip;
+    $this->mataKuliah = $mataKuliah;
+}
+```
+Menginisialisasi atribut saat objek dibuat.
+
+3. Metode tampilkanDosen()
+```
+public function tampilkanDosen() {
+    return "Nama: $this->nama, NIP: $this->nip, Mata Kuliah: $this->mataKuliah";
+}
+```
+Mengembalikan string yang menampilkan nilai dari atribut nama, nip, dan mataKuliah.
+
+4. Instansiasi
+```
+$dosen1 = new Dosen("Pak Abda'u", "123456789", "Praktikum WEB");
+echo $dosen1->tampilkanDosen();
+```
+Membuat objek dosen1 dengan nama, NIP, dan mata kuliah yang ditentukan, lalu menampilkan data dosen.
+### Output
+```
+Nama: Pak Abda'u, NIP: 123456789, Mata Kuliah: Praktikum WEB
+```
