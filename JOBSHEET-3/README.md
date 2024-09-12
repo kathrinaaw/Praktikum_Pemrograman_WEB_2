@@ -55,6 +55,7 @@ echo $student->getNama() . " Has ID: " . $student->getStudentID();
 Katrina Devianti Has ID: KD0406
 ```
 ## 2. Polymorphism
+Polymorphism memungkinkan satu metode untuk memiliki banyak bentuk, biasanya melalui metode overriding di kelas turunan. Dengan ini, objek dapat diperlakukan sebagai bentuk umum dan khusus sesuai kebutuhan.
 ```
 class Person {
     protected $name;
@@ -130,6 +131,7 @@ Teacher Name: Massayu Dinar
 Teacher ID: MD1234
 ```
 ## Encapsulation
+Encapsulation menyembunyikan detail internal dari sebuah objek dan hanya membiarkan interaksi melalui metode publik yang tersedia, menjaga data internal tetap aman dari perubahan tak terduga.
 ```
 class Person {
     private $name;
@@ -217,11 +219,66 @@ Teacher ID: MD1234
 ```
 Enkapsulasi diterapkan dengan mengubah properti menjadi private dan mengaksesnya melalui getter dan setter. Pewarisan dan overriding digunakan untuk menyesuaikan output berdasarkan tipe objek (Student atau Teacher) tanpa mengubah properti privat langsung dari kelas induk (Person).
 ## Abstraction
+Abstraction adalah proses menyembunyikan detail implementasi internal dan hanya menampilkan fungsionalitas utama kepada pengguna. Ini biasanya dicapai dengan menggunakan kelas abstrak atau antarmuka.
+```
+abstract class Course {
+    protected $courseName;
+    protected $instructor;
 
+    public function __construct($courseName, $instructor) {
+        $this->courseName = $courseName;
+        $this->instructor = $instructor;
+    }
 
+    abstract public function getCourseDetails();
+}
+```
+Course adalah kelas abstrak yang tidak dapat diinstansiasi secara langsung. Kelas ini hanya berfungsi sebagai blueprint untuk kelas turunannya. Kelas ini memiliki dua properti, yaitu $courseName (nama kursus) dan $instructor (pengajar). Metode abstrak getCourseDetails() dideklarasikan, yang harus diimplementasikan oleh setiap kelas turunan.
+```
+class OnlineCourse extends Course {
+    private $platform;
 
+    public function __construct($courseName, $instructor, $platform) {
+        parent::__construct($courseName, $instructor);
+        $this->platform = $platform;
+    }
 
+    public function getCourseDetails() {
+        return "Online Course: {$this->courseName}, Instructor: {$this->instructor}, Platform: {$this->platform}";
+    }
+}
+```
+OnlineCourse adalah turunan dari Course yang merepresentasikan kursus online. Properti tambahan adalah $platform, yang menyimpan informasi tentang platform pembelajaran online (misalnya, ZOOM). Metode getCourseDetails() diimplementasikan untuk memberikan detail tentang kursus online.
+```
+class OfflineCourse extends Course {
+    private $location;
 
+    public function __construct($courseName, $instructor, $location) {
+        parent::__construct($courseName, $instructor);
+        $this->location = $location;
+    }
+
+    public function getCourseDetails() {
+        return "Offline Course: {$this->courseName}, Instructor: {$this->instructor}, Location: {$this->location}";
+    }
+}
+```
+OfflineCourse adalah turunan dari Course yang merepresentasikan kursus offline. Properti tambahan adalah $location, yang menyimpan lokasi fisik kursus. Metode getCourseDetails() diimplementasikan untuk memberikan detail tentang kursus offline.
+```
+$onlineCourse = new OnlineCourse("Web Development", "Pi Cheolin", "ZOOM");
+$offlineCourse = new OfflineCourse("Data Science", "Hawa", "Harvard University");
+
+echo $onlineCourse->getCourseDetails() . "<br>";
+echo $offlineCourse->getCourseDetails() . "<br>";
+```
+Membuat dua objek: satu untuk kursus online (OnlineCourse) dan satu untuk kursus offline (OfflineCourse). Setelah objek dibuat, metode getCourseDetails() dipanggil untuk menampilkan informasi masing-masing kursus.
+### Output
+```
+Online Course: Web Development, Instructor: Pi Cheolin, Platform: ZOOM
+Offline Course: Data Science, Instructor: Hawa, Location: Harvard University
+```
+- Kelas abstrak digunakan untuk mendefinisikan kerangka umum bagi kelas-kelas yang berbeda (online dan offline).
+- Polimorfisme ditunjukkan melalui implementasi metode getCourseDetails() yang berbeda pada setiap kelas turunan (OnlineCourse dan OfflineCourse).
 
 
 
