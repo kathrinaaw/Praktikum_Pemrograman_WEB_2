@@ -133,9 +133,90 @@ Teacher ID: MD1234
 ```
 class Person {
     private $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+}
 ```
+Membuat class person dengan atribut $name dengan akses private, sehingga hanya bisa diakses melalui getter dan setter. Fungsi getName() digunakan untuk mendapatkan nilai dari $name, sedangkan setName() digunakan untuk mengubah nilai $name.
+```
+    class Student extends Person {
+    private $studentID;
 
+    public function __construct($name, $studentID) {
+        parent::__construct($name);
+        $this->studentID = $studentID;
+    }
 
+    public function getStudentID() {
+        return "Student ID: " . $this->studentID;
+    }
+
+    public function setStudentID($studentID) {
+        $this->studentID = $studentID;
+    }
+
+    public function getName() {
+        return "Student Name: " . parent::getName();
+    }
+}
+```
+Kelas Student mewarisi kelas Person dan menambahkan properti baru yaitu $studentID. Getter dan setter digunakan untuk mengakses atau mengubah nilai dari $studentID. Metode getName() di-override untuk menampilkan format khusus, tetapi masih memanggil metode getName() dari kelas induk (Person) menggunakan parent::getName().
+```
+class Teacher extends Person {
+    private $teacherID;
+
+    public function __construct($name, $teacherID) {
+        parent::__construct($name);
+        $this->teacherID = $teacherID;
+    }
+
+    public function getTeacherID() {
+        return "Teacher ID: " . $this->teacherID;
+    }
+
+    public function getName() {
+        return "Teacher Name: " . parent::getName();
+    }
+}
+```
+Kelas Teacher juga mewarisi Person dan menambahkan properti baru $teacherID. Override pada metode getName() menampilkan format berbeda, tetapi tetap menggunakan parent::getName() karena properti $name bersifat private di kelas Person.
+```
+$student = new Student("Katrina Devianti", "KD0406");
+echo $student->getName() . "<br>";
+echo $student->getStudentID() . "<br>";
+
+// Mengubah nama dan ID student
+$student->setName("Katarina Blu");
+$student->setStudentID("KB5678");
+echo $student->getName() . "<br>";
+echo $student->getStudentID() . "<br>";
+
+$teacher = new Teacher("Massayu Dinar", "MD1234");
+echo $teacher->getName() . "<br>";
+echo $teacher->getTeacherID() . "<br>";
+```
+Objek Student dibuat dengan nama "Katrina Devianti" dan ID "KD0406". Setelah itu, nama dan ID dari Student diubah menggunakan setter. Objek Teacher dibuat dengan nama "Massayu Dinar" dan ID "MD1234".
+### Output
+```
+Student Name: Katrina Devianti
+Student ID: KD0406
+Student Name: Katarina Blu
+Student ID: KB5678
+Teacher Name: Massayu Dinar
+Teacher ID: MD1234
+```
+Enkapsulasi diterapkan dengan mengubah properti menjadi private dan mengaksesnya melalui getter dan setter. Pewarisan dan overriding digunakan untuk menyesuaikan output berdasarkan tipe objek (Student atau Teacher) tanpa mengubah properti privat langsung dari kelas induk (Person).
+## Abstraction
 
 
 
