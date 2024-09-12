@@ -4,17 +4,30 @@ class Mahasiswa{
     public $nim;
     public $jurusan;
 
-    public function __construct($nama, $nim, $jurusan) {
-        $this->nama = $nama;
-        $this->nim = $nim;
-        $this->jurusan = $jurusan;
+
+    public function getNama() {
+        return "Nama: $this->nama";
+    }
+
+    public function getNIM() {
+        return "NIM: $this->nim";
+    }
+
+    public function getJurusan() {
+        return "Jurusan: $this->jurusan";
     }
 
     public function tampilkanData() {
-        return "Nama: $this->nama, NIM: $this->nim, Jurusan: $this->jurusan";
+        echo $this->getNama() . "<br>";
+        echo $this->getNIM() . "<br>";
+        echo $this->getJurusan() . "<br>";
     }
 }
 
-$mahasiswa1 = new Mahasiswa("Katrina Devianti", "230102037", "Komputer dan Bisnis");
-echo $mahasiswa1->tampilkanData();
+$mahasiswa1 = new Mahasiswa();
+$mahasiswa1->nama = "Katrina Devianti";
+$mahasiswa1->nim = "230102037";
+$mahasiswa1->jurusan = "JKB";
+
+$mahasiswa1->tampilkanData();
 ?>
