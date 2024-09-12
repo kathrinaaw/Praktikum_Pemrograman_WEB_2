@@ -2,29 +2,19 @@
 ## 1. Inheritance
 Inheritance adalah konsep di mana sebuah kelas dapat mewarisi atribut dan metode dari kelas lain. Ini memungkinkan penggunaan kembali kode dan menciptakan hubungan hierarkis antara kelas.
 ```
-class Animal {
-    protected $name;
+class Person {
+    protected $nama;
 
-    public function __construct($name) {
-        $this->name = $name;
+    public function __construct($nama) {
+        $this->nama = $nama;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getNama() {
+        return $this->nama;
     }
 }
 ```
-Kelas Animal:
-- Memiliki properti yang dilindungi (protected) bernama $name.
-- Konstruktornya menerima parameter $name dan menginisialisasi properti $name.
-- Fungsi getNama() digunakan untuk mengembalikan nilai dari properti $name.
-```
-class Dog extends Animal {
-    public function makeSound() {
-        return "Woof!";
-    }
-}
-```
+Kelas Person memiliki properti nama yang bertipe protected, sehingga bisa diakses oleh kelas turunan (Student). Metode getNama() digunakan untuk mengembalikan nilai dari properti nama. Konstruktornya menerima satu parameter ($nama) yang digunakan untuk menginisialisasi properti nama.
 ```
 class Student extends Person {
     private $studentID;
