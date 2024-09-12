@@ -269,7 +269,158 @@ Offline Course: Data Science, Instructor: Hawa, Location: Harvard University
 ```
 - Kelas abstrak digunakan untuk mendefinisikan kerangka umum bagi kelas-kelas yang berbeda (online dan offline).
 - Polimorfisme ditunjukkan melalui implementasi metode getCourseDetails() yang berbeda pada setiap kelas turunan (OnlineCourse dan OfflineCourse).
+## TUGAS
+```
+class Person {
+    protected $name;
 
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function getRole() {
+        return "Person";
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+}
+```
+- Properti: 
+    - protected $name yang menyimpan nama.
+    - Konstruktor: Menerima parameter name untuk menginisialisasi properti name.
+- Metode:
+    - getName(): Mengembalikan nama.
+    - getRole(): Mengembalikan string "Person", yang akan di-override oleh kelas turunan.
+```
+class Dosen extends Person {
+    private $nidn;
+
+    public function __construct($name, $nidn) {
+        parent::__construct($name);
+        $this->nidn = $nidn;
+    }
+
+    public function getRole() {
+        return "Dosen";
+    }
+
+    public function getNidn() {
+        return $this->nidn;
+    }
+
+    public function setNidn($nidn) {
+        $this->nidn = $nidn;
+    }
+}
+```
+- Properti: private $nidn untuk menyimpan NIDN dosen.
+- Konstruktor: Menerima parameter name dan nidn, memanggil konstruktor kelas induk dan menginisialisasi nidn.
+- Metode:
+    - getRole(): Mengembalikan string "Dosen" untuk polimorfisme.
+    - Getter dan setter untuk nidn (enkapsulasi).
+```
+class Mahasiswa extends Person {
+    private $nim;
+
+    public function __construct($name, $nim) {
+        parent::__construct($name);
+        $this->nim = $nim;
+    }
+
+    public function getRole() {
+        return "Mahasiswa";
+    }
+
+    public function getNim() {
+        return $this->nim;
+    }
+
+    public function setNim($nim) {
+        $this->nim = $nim;
+    }
+}
+```
+- Properti: private $nim untuk menyimpan NIM mahasiswa.
+- konstruktor: Menerima parameter name dan nim, memanggil konstruktor kelas induk dan menginisialisasi nim.
+- Metode:
+  - getRole(): Mengembalikan string "Mahasiswa" untuk polimorfisme.
+  - Getter dan setter untuk nim (enkapsulasi).
+```
+abstract class Jurnal {
+    protected $title;
+
+    public function __construct($title) {
+        $this->title = $title;
+    }
+
+    abstract public function submitJurnal();
+}
+```
+- Properti: protected $title untuk menyimpan judul jurnal.
+- Konstruktor: Menerima parameter title untuk menginisialisasi properti title.
+- Metode Abstrak: submitJurnal(), harus diimplementasikan oleh kelas turunan.
+```
+class JurnalDosen extends Jurnal {
+    private $nidn;
+
+    public function __construct($title, $nidn) {
+        parent::__construct($title);
+        $this->nidn = $nidn;
+    }
+
+    public function submitJurnal() {
+        return "Jurnal dengan judul '$this->title' telah diterima oleh Dosen dengan NIDN $this->nidn.";
+    }
+}
+```
+- Properti: private $nidn untuk menyimpan NIDN dosen.
+- Konstruktor: Menerima parameter title dan nidn, memanggil konstruktor kelas induk dan menginisialisasi nidn.
+- Metode:
+    - submitJurnal(): Mengembalikan string dengan detail jurnal untuk dosen.
+```
+class JurnalMahasiswa extends Jurnal {
+    private $nim;
+
+    public function __construct($title, $nim) {
+        parent::__construct($title);
+        $this->nim = $nim;
+    }
+
+    public function submitJurnal() {
+        return "Jurnal dengan judul '$this->title' telah diterima oleh Mahasiswa dengan NIM $this->nim.";
+    }
+}
+```
+- Properti: private $nim untuk menyimpan NIM mahasiswa.
+- Konstruktor: Menerima parameter title dan nim, memanggil konstruktor kelas induk dan menginisialisasi nim.
+- Metode:
+    - submitJurnal(): Mengembalikan string dengan detail jurnal untuk mahasiswa.
+```
+$dosen = new Dosen("Bpk Wahyu", "20232029");
+echo $dosen->getName() . " adalah seorang " . $dosen->getRole() . " dengan NIDN " . $dosen->getNidn() . "<br>";
+
+$mahasiswa = new Mahasiswa("Katrina", "230102037");
+echo $mahasiswa->getName() . " adalah seorang " . $mahasiswa->getRole() . " dengan NIM " . $mahasiswa->getNim() . "<br>";
+
+$jurnalDosen = new JurnalDosen("Matematika Diskrit", $dosen->getNidn());
+echo $jurnalDosen->submitJurnal() . "<br>";
+
+$jurnalMahasiswa = new JurnalMahasiswa("Hukum Newton", $mahasiswa->getNim());
+echo $jurnalMahasiswa->submitJurnal() . "<br>";
+```
+Membuat Objek: Objek Dosen dan Mahasiswa dibuat, serta objek JurnalDosen dan JurnalMahasiswa untuk menunjukkan penggunaan metode yang di-override.
+### Output
+```
+Bpk Wahyu adalah seorang Dosen dengan NIDN 20232029
+Katrina adalah seorang Mahasiswa dengan NIM 230102037
+Jurnal dengan judul 'Matematika Diskrit' telah diterima oleh Dosen dengan NIDN 20232029.
+Jurnal dengan judul 'Hukum Newton' telah diterima oleh Mahasiswa dengan NIM 230102037.
+```
+- Polimorfisme terlihat pada metode getRole() yang di-override oleh kelas Dosen dan Mahasiswa.
+- Enkapsulasi terlihat pada penggunaan getter dan setter untuk nidn dan nim.
+- Pewarisan memungkinkan Dosen dan Mahasiswa mewarisi properti dan metode dari Person, serta JurnalDosen dan JurnalMahasiswa mewarisi dari Jurnal.
 
 
 
