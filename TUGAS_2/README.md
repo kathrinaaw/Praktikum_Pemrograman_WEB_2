@@ -89,3 +89,12 @@ class Courses extends Database {
 }
 ```
 Metode tampil_data dalam kelas Courses dapat dipanggil dengan atau tanpa parameter $tanggal. Jika parameter $tanggal diberikan, metode ini akan menampilkan data berdasarkan tanggal tersebut. Jika tidak ada parameter, metode ini menampilkan semua data. Ini menunjukkan bagaimana satu metode dapat berfungsi berbeda berdasarkan parameter yang diberikan.
+
+### Tampilan Menu Utama
+![image](https://github.com/user-attachments/assets/826bd70e-873d-46e5-8ea2-f05b3b210f47)
+### Tampilan Menu "DATA COURSE"
+![image](https://github.com/user-attachments/assets/7f84bdb5-ad8c-4e26-88b8-089147019dd7)
+### Tampilan Menu "DATA COURSES CLASSES"
+![image](https://github.com/user-attachments/assets/b65f91c1-aac5-4382-9fd9-b1dd0901cfce)
+### Tampilan Menu "DATA COURSE - TANGGAL 13
+![image](https://github.com/user-attachments/assets/bf5b68f8-d9d3-4a3e-9f2b-64a8f204c0c2)
